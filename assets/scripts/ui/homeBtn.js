@@ -15,9 +15,11 @@ cc.Class({
         cc.log('start');
     },
     addCallback:function(event){
-        
+        this.socket.emit("event","Hello");
        cc.log('add');
     },
+    
+    
     
     
  
