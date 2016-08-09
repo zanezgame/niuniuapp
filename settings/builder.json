@@ -1,0 +1,13 @@
+{
+  "excludeScenes": [],
+  "orientation": {
+    "landscapeLeft": false,
+    "landscapeRight": false,
+    "portrait": true,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.niuniuapp",
+  "startScene": "32e6032a-f881-49c4-8876-907dea8c99e0",
+  "title": "niuniuapp",
+  "webOrientation": "auto"
+}
