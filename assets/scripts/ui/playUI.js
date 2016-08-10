@@ -1,23 +1,24 @@
-cc.Class({
-    extends: cc.Component,
+var config = require("config");
+var baseUi = require("baseUi");
+baseUi.extend({
 
     properties: {
-        cardPrefab:cc.Prefab,
-        
+        cardPrefab: cc.Prefab,
+
     },
 
     // use this for initialization
     onLoad: function () {
-        
-        var data={mainpic:'fangkuai_big',suit:'fangkuai_small',point:'3'};
-        
+
+        var data = {mainpic: 'fangkuai_big', suit: 'fangkuai_small', point: '3'};
+
         var item = cc.instantiate(this.cardPrefab);
-         this.node.addChild(item);
-          item.getComponent('cardPrefab').init({
-                mainpic: data.mainpic,
-                suit: data.suit,
-                point: data.point
-            });
+        this.node.addChild(item);
+        item.getComponent('cardPrefab').init({
+            mainpic: data.mainpic,
+            suit: data.suit,
+            point: data.point
+        });
 
     },
 

@@ -4,7 +4,7 @@ cc.Class({
     socket: null,
     userinfo: null,
 
-    init: function () {
+    start: function () {
         if (!cc.sys.isNative) {
             window.io = require('socket.io');
             cc.log("is not Native");
@@ -12,16 +12,17 @@ cc.Class({
             window.io = SocketIO;
             cc.log("isNative");
         }
+        //获取用户本地存储信息
+        if (!this.userinfo) {
+            this.userinfo = sys.localStorage.getItem("userinfo");
+        }
 
     },
     onEnter: function () {
     },
 
     onLoad: function () {
-        //获取用户本地存储信息
-        if (!this.userinfo) {
-            this.userinfo = sys.localStorage.getItem("userinfo");
-        }
+
 
         var bgurl = cc.url.raw("resources/music/bg.mp3");
         //加载背景音乐
@@ -35,14 +36,6 @@ cc.Class({
             this.socket = io.connect(config.url);
         }
 
-        // // join和leave
-        // io.on('connection', function(socket){
-        //  socket.join('some room');
-        //  // socket.leave('some room');
-
-
-        // });
-
 
         //连接服务器成功执行
         this.socket.on('connect', function () {
@@ -52,6 +45,22 @@ cc.Class({
         //服务器默认信息
         this.socket.on('message', function (obj) {
             cc.log("message:" + obj);
+
+        });
+
+
+        //加入房间
+        this.socket.on('join', function (data) {
+            console.log("传入参数：" + data);
+            sys.localStorage.setItem("room", data);
+            cc.director.loadScene('banker');
+        });
+
+        //离开房间
+        this.socket.on('leave', function (data) {
+            console.log("传入参数：" + data);
+            sys.localStorage.remove("room");
+            cc.director.loadScene('home');
 
         });
 
@@ -88,5 +97,6 @@ cc.Class({
                 cc.log("login:" + obj.msg);
             }
         });
+
     },
 });

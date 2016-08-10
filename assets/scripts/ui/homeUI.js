@@ -1,6 +1,6 @@
 var config = require("config");
-var baseUI = require("BaseUi");
-baseUI.extend({
+var baseUi = require("baseUi");
+baseUi.extend({
     properties: {
         connect: {
             default: null,
@@ -19,11 +19,30 @@ baseUI.extend({
             type: cc.Label
         }
     },
-    init: function () {
-        this._super();
 
+    start: function () {
+        this._super();
+        cc.log("-----------------start");
+        var self = this;
+        if (!this.userinfo) {
+            cc.director.loadScene('login');
+        }
+        var userObj = JSON.parse(this.userinfo);
+        cc.loader.load(userObj.data.head, function (err, tex) {
+
+            cc.textureCache.addImage(userObj.data.head);
+
+            var sf = new cc.SpriteFrame(tex);
+            self.head.spriteFrame = sf;
+
+
+        });
+
+        this.username.string = userObj.data.name;
+        this.integral.string = "积分：" + userObj.data.integral;
     },
     onEnter: function () {
+        cc.log("-----------------onEnter");
         this._super();
         var label = new cc.LabelTTF("test", "", 36);
         this.addChild(label);
@@ -31,38 +50,30 @@ baseUI.extend({
     },
 
     onLoad: function () {
+        cc.log("-----------------onLoad");
+        var self = this;
         this._super();
-        if (!this.userinfo) {
-            cc.director.loadScene('login');
-        }
-        var userObj = JSON.parse(this.userinfo);
-        var realUrl = cc.url.raw(userObj.data.head);
-        var txt = cc.loader.load(userObj.data.head, function (err, tex) {
-            // return tex;
-            var sp = new spriteFrame(tex);
-            Node.addChild(sp)
-            cc.log('Should load a texture from external url: ' + (tex instanceof cc.Texture2D));
-        });
+
         // var te = cc.loader.loadRes(userObj.data.head, cc.SpriteFrame, function (err, spriteFrame) {
         //     return spriteFrame;
         // });
         // this.head.spriteFrame = te;
         //
         // this.head.Texture = realUrl;
-        this.username.string = userObj.data.name;
-        this.integral.string = userObj.data.integral;
+
 
     },
 
     //加入房间
     startCallback: function (event) {
-        cc.director.loadScene('play');
-        cc.log('start');
+        cc.director.loadScene('banker');
+        this.socket.emit("join", "{state:1}");
+        cc.log('加入房间');
     },
     //创建房间
     addCallback: function (event) {
         this.socket.emit("event", "Hello");
-        cc.log('add');
+        cc.log('创建房间');
     },
     //退出登录
     logoutCallback: function (event) {

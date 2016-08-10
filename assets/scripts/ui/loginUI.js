@@ -1,8 +1,8 @@
 var config = require("config");
-var baseUI = require("BaseUi");
-baseUI.extend({
+var baseUi = require("baseUi");
+baseUi.extend({
     properties: {},
-   
+
     init: function () {
         this._super();
 
@@ -24,7 +24,7 @@ baseUI.extend({
         cc.log("本地存储：" + this.userinfo);
         cc.log('手机号登录');
         var data = {type: "mobile", value: "2"};
-        // this.socket.emit("login", JSON.stringify(data));
+        this.socket.emit("register", JSON.stringify(data));
     },
 
 });
