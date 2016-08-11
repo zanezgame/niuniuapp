@@ -3,9 +3,8 @@ var baseUi = require("baseUi");
 baseUi.extend({
     properties: {},
 
-    init: function () {
+    start: function () {
         this._super();
-
     },
     onEnter: function () {
         this._super();
@@ -21,6 +20,7 @@ baseUi.extend({
         this.socket.emit("login", JSON.stringify(data));
     },
     mobileCallBank: function () {
+
         cc.log("本地存储：" + this.userinfo);
         cc.log('手机号登录');
         var data = {type: "mobile", value: "2"};

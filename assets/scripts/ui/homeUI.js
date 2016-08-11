@@ -24,35 +24,48 @@ baseUi.extend({
         this._super();
         cc.log("-----------------start");
         var self = this;
-        if (!this.userinfo) {
-            cc.director.loadScene('login');
-        }
-        var userObj = JSON.parse(this.userinfo);
+
+        var userObj = JSON.parse(Global.userInfo);
         cc.loader.load(userObj.data.head, function (err, tex) {
 
             cc.textureCache.addImage(userObj.data.head);
 
             var sf = new cc.SpriteFrame(tex);
             self.head.spriteFrame = sf;
-
-
         });
 
         this.username.string = userObj.data.name;
         this.integral.string = "积分：" + userObj.data.integral;
+        //cc.find("Cannons/addDialog", this.node); //
+
+
     },
     onEnter: function () {
         cc.log("-----------------onEnter");
         this._super();
-        var label = new cc.LabelTTF("test", "", 36);
-        this.addChild(label);
-        label.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+
     },
 
     onLoad: function () {
         cc.log("-----------------onLoad");
-        var self = this;
         this._super();
+        var self = this;
+        if (!Global.userInfo) {
+            cc.director.loadScene('login');
+            return;
+        }
+
+
+        var btnSet = cc.find("Canvas/UI/btn/set");
+        cc.log(btnSet);
+        btnSet.on('mousedown', function (event) {
+            var addDialog = cc.find("Canvas/UI/addDialog");
+            //var addDialog = this.node.getChildByName("UI").getChildByName("addDialog");
+            // 创建一个移动动作
+            var actionBy = cc.moveTo(0.5, cc.p(0, 0));
+            addDialog.runAction(actionBy);
+        }, this);
+
 
         // var te = cc.loader.loadRes(userObj.data.head, cc.SpriteFrame, function (err, spriteFrame) {
         //     return spriteFrame;
@@ -64,21 +77,22 @@ baseUi.extend({
 
     },
 
-    //加入房间
+//加入房间
     startCallback: function (event) {
-        cc.director.loadScene('banker');
-        this.socket.emit("join", "{state:1}");
         cc.log('加入房间');
+        this.socket.emit("join", sys.localStorage.getItem("userinfo"));
+
     },
-    //创建房间
+//创建房间
     addCallback: function (event) {
         this.socket.emit("event", "Hello");
         cc.log('创建房间');
     },
-    //退出登录
+//退出登录
     logoutCallback: function (event) {
         this.socket.emit("online", "{state:1}");
         cc.log('系统退出');
         cc.director.loadScene('login');
-    },
-});
+    }
+})
+;

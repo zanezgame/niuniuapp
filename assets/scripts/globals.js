@@ -1,32 +1,7 @@
-var config = require("config");
-cc.Class({
-    extends: cc.Component,
-    socket: null,
-    start: function () {
-
-
-    },
-    onEnter: function () {
-    },
-
-    onLoad: function () {
-
-        Global.userInfo = sys.localStorage.getItem("userinfo");
-        Global.roomInfo = sys.localStorage.getItem("roominfo");
-
-
-        var bgurl = cc.url.raw("resources/music/bg.mp3");
-        //加载背景音乐
-        cc.audioEngine.playMusic(bgurl, true);
-        cc.audioEngine.playMusic("res/music/bg", true);
-        cc.audioEngine.rewindMusic();
-
-        this.initSocket();
-    },
-    update: function (dt) {
-        // cc.log('定时器：' + dt);
-    },
-    initSocket: function () {
+window.Global = {
+    userInfo: null,//用户信息
+    roomInfo: null,//房间信息
+    socket:function(){
         if (this.socket != null) {
             return;
         }
@@ -134,5 +109,5 @@ cc.Class({
             }
         });
 
-    }
-});
+    },
+};
