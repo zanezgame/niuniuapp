@@ -28,13 +28,13 @@ baseUi.extend({
             cc.director.loadScene('login');
         }
         var userObj = JSON.parse(Global.userInfo);
-        cc.loader.load(userObj.data.head, function (err, tex) {
-            cc.textureCache.addImage(userObj.data.head);
+        cc.loader.load(userObj.head, function (err, tex) {
+            cc.textureCache.addImage(userObj.head);
             var sf = new cc.SpriteFrame(tex);
             self.head.spriteFrame = sf;
         });
-        this.username.string = userObj.data.name;
-        this.integral.string = "积分：" + userObj.data.integral;
+        this.username.string = userObj.name;
+        this.integral.string = "积分：" + userObj.integral;
     },
 
     onLoad: function () {

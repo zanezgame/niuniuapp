@@ -12,19 +12,21 @@ baseUi.extend({
 
     onLoad: function () {
         this._super();
+        var btnWeixin = cc.find("Canvas/btn/mobile").addComponent(cc.bottom);
+        btnWeixin.on('mousedown', function (event) {
+            cc.log('微信登录');
+            var data = {openid: 123};
+            Global.socket.emit("login", JSON.stringify(data));
+        }, this);
 
     },
-    weixinCallBank: function () {
-        cc.log('微信登录');
-        var data = {type: "weixin", value: "1"};
-        this.socket.emit("login", JSON.stringify(data));
-    },
+
     mobileCallBank: function () {
 
         cc.log("本地存储：" + this.userinfo);
         cc.log('手机号登录');
         var data = {type: "mobile", value: "2"};
-        this.socket.emit("register", JSON.stringify(data));
+        Global.socket.emit("register", JSON.stringify(data));
     },
 
 });
