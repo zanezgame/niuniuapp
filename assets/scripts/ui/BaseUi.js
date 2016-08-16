@@ -6,11 +6,12 @@ cc.Class({
     },
     onEnter: function () {
     },
-
+    enemyPool: null,
     onLoad: function () {
 
         Global.userInfo = sys.localStorage.getItem("userinfo");
         Global.roomInfo = sys.localStorage.getItem("roominfo");
+        this.enemyPool = new cc.NodePool()
 
         var bgurl = cc.url.raw("resources/music/bg.mp3");
         //加载背景音乐
@@ -152,8 +153,6 @@ cc.Class({
                     cc.log("正在加载banker");
                     break;
             }
-
-
         });
 
         //场景切换
