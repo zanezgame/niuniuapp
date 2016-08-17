@@ -1,22 +1,17 @@
-cc.Class({
-    extends: cc.Component,
+var config = require("config");
+var baseUi = require("baseUi");
 
-    properties: {
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
-    },
+baseUi.extend({
+
+    properties: {},
 
     // use this for initialization
     onLoad: function () {
-
+        this._super();
+        if (!Global.roomInfo) {
+            cc.director.loadScene('home');
+            return;
+        }
     },
 
     // called every frame, uncomment this function to activate update callback

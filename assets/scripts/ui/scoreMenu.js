@@ -1,6 +1,7 @@
 var config = require("config");
 var baseMenu = require("baseMenu");
 baseMenu.extend({
+
     properties: {
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
@@ -23,4 +24,18 @@ baseMenu.extend({
     // update: function (dt) {
 
     // },
+    // },
+    //退出房间
+    logoutCallback: function (event) {
+        Global.socket.emit("online", "{state:1}");
+        cc.log('系统退出');
+        cc.director.loadScene('home');
+    },
+    // },
+    //重新开始
+    restartCallback: function (event) {
+        Global.socket.emit("online", "{state:1}");
+        cc.log('重新开始');
+        cc.director.loadScene('banker');
+    },
 });

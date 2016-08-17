@@ -2,7 +2,6 @@ var config = require("config");
 var baseUi = require("baseUi");
 
 baseUi.extend({
-
     properties: {},
 
     // use this for initialization
@@ -12,11 +11,16 @@ baseUi.extend({
             cc.director.loadScene('home');
             return;
         }
-
+        this.init();
     },
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 
     // },
+
+    init: function () {
+        var players = cc.find("Canvas/ui/playerList").getComponent(cc.Layout);
+
+    }
 });

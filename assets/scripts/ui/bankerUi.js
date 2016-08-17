@@ -3,10 +3,6 @@ var baseUi = require("baseUi");
 
 baseUi.extend({
     properties: {
-        connect: {
-            default: null,
-            type: cc.Label
-        },
         playerPrefab: {
             default: null,
             type: cc.Prefab
@@ -24,19 +20,15 @@ baseUi.extend({
     onLoad: function () {
         this._super();
         var self = this;
-        //this.initUser();
-        var userPrefab = cc.instantiate(this.playerPrefab);
-        var userObj = JSON.parse(Global.userInfo);
-        userPrefab.setPosition(0, 0);
-        this.node.addChild(userPrefab);
-        userPrefab.setPosition(0, 0);
+        cc.log("Global.roomInfo:" + Global.roomInfo);
 
-        var player = userPrefab.getComponent("Player");
-        player.init(userObj);
-        if (!Global.userInfo) {
-            cc.director.loadScene('login');
+        cc.log("sys.localStorage:" + sys.localStorage.getItem("roominfo"));
+        if (!Global.roomInfo) {
+            cc.director.loadScene('home');
             return;
         }
+        this.init();
+
         //var txtTime = cc.find("Canvas/ui/time/text").getComponent(cc.Label);
         //
         //var interval = parseInt(txtTime.string);
@@ -50,15 +42,26 @@ baseUi.extend({
         //}, 1);
 
     },
-    initUser: function () {
-        var userPrefab = cc.instantiate(this.playerPrefab);
-        var userObj = JSON.parse(Global.userInfo);
+    init: function () {
+        //this.showMsg("数据加载中...")
+        //if (!Global.players) {
+        //    this.showMsg("数据加载中...")
+        //}
+        /// this.init();
 
-        this.node.addChild(userPrefab);
-        userPrefab.setPosition(-500, -100);
 
-        var player = userPrefab.getComponent("Player");
-        player.init(userObj);
+        //var userPrefab = cc.instantiate(this.playerPrefab);
+        //var userObj = JSON.parse(Global.userInfo);
+        //userPrefab.setPosition(0, 0);
+        //this.node.addChild(userPrefab);
+        //userPrefab.setPosition(0, 0);
+        //
+        //var player = userPrefab.getComponent("Player");
+        //player.init(userObj);
+        //if (!Global.userInfo) {
+        //    cc.director.loadScene('login');
+        //    return;
+        //}
 
     },
 });

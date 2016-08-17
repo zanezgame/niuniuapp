@@ -1,6 +1,6 @@
 var config = require("config");
-var baseUi = require("baseUi");
-baseUi.extend({
+cc.extend({
+    extends: cc.Component,
     properties: {},
 
     start: function () {
@@ -12,6 +12,13 @@ baseUi.extend({
 
     onLoad: function () {
         this._super();
+        Global.userInfo = sys.localStorage.getItem("userinfo");
+        Global.roomInfo = sys.localStorage.getItem("roominfo");
+        if (Global.userInfo) {
+            cc.director.loadScene("home");
+            return;
+        }
+
         //var btnWeixin = cc.find("Canvas/btn/mobile").addComponent(cc.bottom);
         //btnWeixin.on('mousedown', function (event) {
         //    cc.log('微信登录');
@@ -20,7 +27,6 @@ baseUi.extend({
         //}, this);
 
     },
-
 
 
 });

@@ -1,5 +1,6 @@
-cc.Class({
-    extends: cc.Component,
+var config = require("config");
+var baseMenu = require("baseMenu");
+baseMenu.extend({
 
     properties: {},
 
@@ -11,7 +12,7 @@ cc.Class({
 //抢庄
     grabCallback: function (event) {
         cc.log('抢庄');
-        Global.socket.emit("grab", sys.localStorage.getItem("userinfo"));
+        //Global.socket.emit("grab", sys.localStorage.getItem("userinfo"));
         cc.director.loadScene("betting");
 
     },

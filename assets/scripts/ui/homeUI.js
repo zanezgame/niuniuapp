@@ -20,11 +20,13 @@ baseUi.extend({
 
     onLoad: function () {
         this._super();
-        var self = this;
-        if (!Global.userInfo) {
-            cc.director.loadScene('login');
-            return;
+        //判断原来是否在房间里
+        if (!Global.roomInfo) {
+            //cc.director.loadScene("banker");
+            // Global.socket.emit("join", sys.localStorage.getItem("userinfo"));
         }
+
+        var self = this;
         this.initUser();
 
 

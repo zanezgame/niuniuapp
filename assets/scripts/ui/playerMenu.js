@@ -1,5 +1,6 @@
-cc.Class({
-    extends: cc.Component,
+var config = require("config");
+var baseMenu = require("baseMenu");
+baseMenu.extend({
 
     properties: {
         // foo: {
@@ -23,4 +24,16 @@ cc.Class({
     // update: function (dt) {
 
     // },
+    //退出房间
+    logoutCallback: function (event) {
+        Global.socket.emit("online", "{state:1}");
+        cc.log('系统退出');
+        cc.director.loadScene('home');
+    },
+    //成绩公布
+    scoreCallback: function (event) {
+        Global.socket.emit("online", "{state:1}");
+        cc.log('系统退出');
+        cc.director.loadScene('score');
+    }
 });
