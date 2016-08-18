@@ -2,29 +2,30 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        id: {
+        number: {
             default: null,
             type: cc.Label
         },
-        playerName: {
+        nickNmae: {
             default: null,
             type: cc.Label
         },
-        playerPhoto: {
+        pic: {
             default: null,
             type: cc.Sprite
         },
-        integral: {
+        score: {
             default: null,
             type: cc.Label
         }
     },
     init: function (userinfo) {
+        cc.log("UserInfo:" + JSON.stringify(userinfo));
         var self = this;
-        this.id.string = "ID:" + userinfo.id;
-        this.playerName.string = userinfo.playerName;
-        this.integral.string = userinfo.integral;
-        cc.loader.load(userinfo.playerPhoto, function (err, tex) {
+        this.number.string = "ID:" + userinfo.number;
+        this.nickNmae.string = userinfo.nickName;
+        this.score.string = userinfo.score;
+        cc.loader.load(userinfo.pic, function (err, tex) {
 
             //self.playerPhoto.spriteFrame = new cc.SpriteFrame(tex);
             //self.playerPhoto.sizeMode = cc.Sprite.SizeMode.CUSTOM;

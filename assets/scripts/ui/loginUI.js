@@ -1,5 +1,6 @@
 var config = require("config");
-cc.extend({
+var baseUi = require("baseUi");
+baseUi.extend({
     extends: cc.Component,
     properties: {},
 

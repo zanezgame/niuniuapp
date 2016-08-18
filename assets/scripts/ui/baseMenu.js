@@ -1,3 +1,4 @@
+var socketUtil = require("SocketUtil");
 cc.Class({
     extends: cc.Component,
 
@@ -5,21 +6,9 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-
+        socketUtil.init();
     },
 
-    //加入房间
-    startCallback: function (event) {
-        cc.log('加入房间');
-        //cc.director.loadScene("banker");
-        Global.socket.emit("join", sys.localStorage.getItem("userinfo"));
-
-    },
-//创建房间
-    addCallback: function (event) {
-        Global.socket.emit("event", "Hello");
-        cc.log('创建房间');
-    },
     bettingCallback: function (event) {
         Global.socket.emit("online", "{state:1}");
         cc.log('开注界面');

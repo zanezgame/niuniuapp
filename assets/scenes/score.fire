@@ -1055,18 +1055,10 @@
       "__id__": 6
     },
     "_enabled": true,
-    "id": {
-      "__id__": 28
-    },
-    "playerName": {
-      "__id__": 16
-    },
-    "playerPhoto": {
-      "__id__": 9
-    },
-    "integral": {
-      "__id__": 24
-    }
+    "number": null,
+    "nickNmae": null,
+    "pic": null,
+    "score": null
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1884,18 +1876,10 @@
       "__id__": 35
     },
     "_enabled": true,
-    "id": {
-      "__id__": 57
-    },
-    "playerName": {
-      "__id__": 45
-    },
-    "playerPhoto": {
-      "__id__": 38
-    },
-    "integral": {
-      "__id__": 53
-    }
+    "number": null,
+    "nickNmae": null,
+    "pic": null,
+    "score": null
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2581,6 +2565,15 @@
     "_enabled": true,
     "connect": {
       "__id__": 81
+    },
+    "bankerPrefab": {
+      "__uuid__": "8e6382c3-cf7d-4356-9b42-a11c6e06ef0f"
+    },
+    "playerCarPrefab": {
+      "__uuid__": "718019a5-c621-44b1-ac44-41175fd814c2"
+    },
+    "mePrefab": {
+      "__uuid__": "498df413-eaa7-45f5-8811-727d3214f065"
     }
   }
 ]

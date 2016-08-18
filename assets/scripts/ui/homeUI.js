@@ -20,13 +20,18 @@ baseUi.extend({
 
     onLoad: function () {
         this._super();
+        var self = this;
+        //判断原来是否在房间里
+        if (!Global.userInfo) {
+            cc.director.loadScene("login");
+
+        }
         //判断原来是否在房间里
         if (!Global.roomInfo) {
-            //cc.director.loadScene("banker");
-            // Global.socket.emit("join", sys.localStorage.getItem("userinfo"));
+            Global.socket.emit("join", Global.userInfo);
         }
 
-        var self = this;
+
         this.initUser();
 
 
@@ -50,14 +55,14 @@ baseUi.extend({
 
     },
     initUser: function () {
+
         var userPrefab = cc.instantiate(this.playerPrefab);
-        var userObj = JSON.parse(Global.userInfo);
-        cc.log(userObj.playerName);
-        userPrefab.setPositionX(-50);
-        userPrefab.setPositionY(-500);
-        this.node.addChild(userPrefab);
+        userPrefab.parent = this.node;
+        userPrefab.position = cc.p(-120, -500)
+
         var player = userPrefab.getComponent("Player");
-        player.init(userObj);
+        var userInfoObj = JSON.parse(Global.userInfo);
+        player.init(userInfoObj);
 
     },
 

@@ -9,14 +9,14 @@ baseMenu.extend({
         this._super();
     },
     weixinCallBank: function () {
+        var data = {type: "weixin", dlm: "13983087661", dlip: "127.0.0.1", zhlx: 2, sjid: 0, pic: ""};
+        Global.socket.emit("login", JSON.stringify(data));
         cc.log('微信登录');
-        var data = {type: "mobile", value: "2"};
-        cc.director.loadScene("home");
-        // Global.socket.emit("login", JSON.stringify(data));
     },
     mobileCallBank: function () {
-        cc.log('手机号登录');
-        var data = {type: "mobile", value: "2"};
+        var data = {type: "phone", dlm: "13983087661", dlip: "127.0.0.1", zhlx: 2, sjid: 0, pic: ""};
         Global.socket.emit("login", JSON.stringify(data));
+        cc.log('手机号登录');
+
     },
 });
